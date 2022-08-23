@@ -6,15 +6,26 @@
 	<meta charset="UTF-8">
 	<meta name="format-detection" content="telephone=no">
 	<!-- <style>body{opacity: 0;}</style> -->
-	<link rel="stylesheet" href="css/style.min.css?_v=20220822232918">
+	<link rel="stylesheet" href="css/style.min.css?_v=20220824001630">
 	<link rel="shortcut icon" href="favicon.ico">
 	<!-- <meta name="robots" content="noindex, nofollow"> -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
 <body>
+	<div class="preloader">
+		<div class="preloader__row">
+			<div class="preloader__item"></div>
+			<div class="preloader__item"></div>
+		</div>
+	</div>
+	<button class="back-to-top hidden">
+		<svg xmlns="http://www.w3.org/2000/svg" class="back-to-top-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+			<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 11l5-5m0 0l5 5m-5-5v12" />
+		</svg>
+	</button>
 	<div class="wrapper">
-		<header data-lp data-watch data-watch-once class="header">
+		<header class="header">
 			<div class="header__container">
 				<a href="#" class="header__logo"><img src="img/logo.svg" alt="Logotype"></a>
 				<div class="header__menu menu">
@@ -28,7 +39,7 @@
 									<li class="menu__sub-item"><a href="#" class="menu__sub-link">Коллектив</a></li>
 									<li class="menu__sub-item"><a href="#" class="menu__sub-link">История компании</a></li>
 								</ul>
-								</lidata-spoller>
+							</li>
 							<li class="menu__item"><a href="#" class="menu__link">НОВОСТИ И АКЦИИ</a></li>
 							<li class="menu__item"><a href="#" class="menu__link">КОНТАКТЫ</a></li>
 							<li class="menu__item"><a href="#" class="menu__link">БЛОГ</a></li>
@@ -532,7 +543,7 @@
 							</div>
 						</div>
 						<div class="contacts__column contacts__column_l">
-							<iframe class="contacts__map" src="https://yandex.ru/map-widget/v1/-/CCURrSfMsB" width="100%" height="100%" frameborder="1" allowfullscreen="true" style="position:relative;"></iframe>
+							<iframe class="contacts__map" src="https://yandex.ru/map-widget/v1/-/CCURrSfMsB" frameborder="1" allowfullscreen="true"></iframe>
 						</div>
 					</div>
 				</div>
@@ -610,7 +621,16 @@
 			</div>
 		</div>
 	</div>
-	<script src="js/app.min.js?_v=20220822232918"></script>
+	<script>
+		window.onload = function() {
+			document.body.classList.add('loaded_hiding');
+			window.setTimeout(function() {
+				document.body.classList.add('loaded');
+				document.body.classList.remove('loaded_hiding');
+			}, 500);
+		}
+	</script>
+	<script src="js/app.min.js?_v=20220824001630"></script>
 </body>
 
 </html>

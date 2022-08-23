@@ -14,13 +14,6 @@
             document.documentElement.classList.add(className);
         }));
     }
-    function addLoadedClass() {
-        window.addEventListener("load", (function() {
-            setTimeout((function() {
-                document.documentElement.classList.add("loaded");
-            }), 0);
-        }));
-    }
     let _slideUp = (target, duration = 500, showmore = 0) => {
         if (!target.classList.contains("_slide")) {
             target.classList.add("_slide");
@@ -4592,32 +4585,6 @@
     }
     modules_flsModules.watcher = new ScrollWatcher({});
     let addWindowScrollEvent = false;
-    function headerScroll() {
-        addWindowScrollEvent = true;
-        const header = document.querySelector("header.header");
-        const headerShow = header.hasAttribute("data-scroll-show");
-        const headerShowTimer = header.dataset.scrollShow ? header.dataset.scrollShow : 500;
-        const startPoint = header.dataset.scroll ? header.dataset.scroll : 1;
-        let scrollDirection = 0;
-        let timer;
-        document.addEventListener("windowScroll", (function(e) {
-            const scrollTop = window.scrollY;
-            clearTimeout(timer);
-            if (scrollTop >= startPoint) {
-                !header.classList.contains("_header-scroll") ? header.classList.add("_header-scroll") : null;
-                if (headerShow) {
-                    if (scrollTop > scrollDirection) header.classList.contains("_header-show") ? header.classList.remove("_header-show") : null; else !header.classList.contains("_header-show") ? header.classList.add("_header-show") : null;
-                    timer = setTimeout((() => {
-                        !header.classList.contains("_header-show") ? header.classList.add("_header-show") : null;
-                    }), headerShowTimer);
-                }
-            } else {
-                header.classList.contains("_header-scroll") ? header.classList.remove("_header-scroll") : null;
-                if (headerShow) header.classList.contains("_header-show") ? header.classList.remove("_header-show") : null;
-            }
-            scrollDirection = scrollTop <= 0 ? 0 : scrollTop;
-        }));
-    }
     function digitsCounter() {
         if (document.querySelectorAll("[data-digits-counter]").length) document.querySelectorAll("[data-digits-counter]").forEach((element => {
             element.dataset.digitsCounter = element.innerHTML;
@@ -4657,12 +4624,22 @@
             }));
         }
     }), 0);
+    const showOnPx = 100;
+    const backToTopButton = document.querySelector(".back-to-top");
+    const scrollContainer = () => document.documentElement || document.body;
+    document.addEventListener("scroll", (() => {
+        if (scrollContainer().scrollTop > showOnPx) backToTopButton.classList.remove("hidden"); else backToTopButton.classList.add("hidden");
+    }));
+    const goToTop = () => {
+        document.body.scrollIntoView({
+            behavior: "smooth"
+        });
+    };
+    backToTopButton.addEventListener("click", goToTop);
     window["FLS"] = true;
     isWebp();
-    addLoadedClass();
     menuInit();
     spollers();
     showMore();
-    headerScroll();
     digitsCounter();
 })();
