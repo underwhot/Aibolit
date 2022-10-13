@@ -4636,7 +4636,7 @@
         });
     };
     backToTopButton.addEventListener("click", goToTop);
-    window["FLS"] = true;
+    window["FLS"] = false;
     isWebp();
     menuInit();
     spollers();
